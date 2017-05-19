@@ -1,6 +1,16 @@
 #!/bin/bash
 # Check where our HEAD is at
 
+TOPLEVEL=$(git rev-parse --show-toplevel)
+
+readmes=( README.md )
+
+if [ ! -f "$TOPLEVEL/README.md" ]; then
+    echo ""
+    echo "[WARNING] Your project has no README.md !"
+    echo ""
+fi
+
 protected_branch=( master release )
 re="$(printf '%s\n' "${protected_branch[@]}" | paste -sd '|')"
 
@@ -9,7 +19,7 @@ current_branch=$(git symbolic-ref --short HEAD)
 if [[ "$current_branch" =~ $protected_branch ]]; then
   echo ""
   echo "[ERROR] Work on master $current_branch is restricted.\
-Please create a new branch."
+ Please create a new branch."
   echo ""
     exit 1
 fi
