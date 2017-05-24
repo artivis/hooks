@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEBUG=1
+DEBUG=0
 
 # Retrieve author information as Git sees it while commiting
 AUTHORINFO=$(git var GIT_AUTHOR_IDENT) || exit 1
